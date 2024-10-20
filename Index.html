@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flick</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #f5f5f5, #ffffff);
+        }
+
+        /* Estilos da Tela de Login */
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to bottom right, #0095f6, #6a0dad);
+            color: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            max-width: 400px; /* Limita a largura da tela de login */
+            margin: auto; /* Centraliza a tela */
+        }
+
+        .login-container h1 {
+            margin-bottom: 20px;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .login-container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #0095f6;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+        }
+
+        .login-container .signup-link {
+            margin-top: 10px;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Estilos da Tela Inicial */
+        header {
+            background-color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .add-user {
+            font-size: 16px;
+            color: #0095f6;
+            cursor: pointer;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .post {
+            width: 100%;
+            max-width: 500px;
+            background-color: #fff;
+            border: 1px solid #dbdbdb;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .post img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .post-content {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #ffffff;
+            box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+
+        .footer a {
+            text-decoration: none;
+            color: #0095f6;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Tela de Login -->
+    <div id="login-screen" class="login-container">
+        <h1>Flick</h1>
+        <input type="text" id="username" placeholder="Nome de usuário" required>
+        <input type="password" id="password" placeholder="Senha" required>
+        <input type="submit" value="Entrar" onclick="login()">
+        <div class="signup-link" onclick="showSignup()">Cadastrar-se</div>
+    </div>
+
+    <!-- Tela de Cadastro -->
+    <div id="signup-screen" class="login-container" style="display: none;">
+        <h1>Cadastrar-se</h1>
+        <input type="text" id="new-username" placeholder="Nome de usuário" required>
+        <input type="password" id="new-password" placeholder="Senha" required>
+        <input type="submit" value="Cadastrar" onclick="signup()">
+        <div class="signup-link" onclick="showLogin()">Já tem uma conta? Entrar</div>
+    </div>
+
+    <!-- Tela Inicial -->
+    <div id="home-screen" style="display: none;">
+        <header>
+            <h1>Flick</h1>
+            <span class="add-user" onclick="showUserList()">Adicionar</span>
+        </header>
+
+        <div class="container" id="app">
+            <!-- Postagens vão aqui -->
+            <div class="post">
+                <img src="https://via.placeholder.com/500x300" alt="Post Image">
+                <div class="post-content">Descrição da postagem 1.</div>
+            </div>
+            <div class="post">
+                <img src="https://via.placeholder.com/500x300" alt="Post Image">
+                <div class="post-content">Descrição da postagem 2.</div>
+            </div>
+            <div class="post">
+                <img src="https://via.placeholder.com/500x300" alt="Post Image">
+                <div class="post-content">Descrição da postagem 3.</div>
+            </div>
+            <div class="post">
+                <img src="https://via.placeholder.com/500x300" alt="Post Image">
+                <div class="post-content">Descrição da postagem 4.</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <a href="#">Início</a>
+            <a href="#">Buscar</a>
+            <a href="#">Adicionar</a>
+            <a href="#">Perfil</a>
+        </div>
+    </div>
+
+    <script>
+        function login() {
+            // Simulação de login
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username && password) {
+                // Aqui você pode adicionar a lógica de verificação de usuário
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('home-screen').style.display = 'block';
+            } else {
+                alert("Por favor, preencha todos os campos.");
+            }
+        }
+
+        function signup() {
+            const newUsername = document.getElementById('new-username').value;
+            const newPassword = document.getElementById('new-password').value;
+
+            if (newUsername && newPassword) {
+                // Aqui você pode adicionar a lógica para cadastrar o novo usuário
+                alert("Usuário cadastrado com sucesso!");
+                showLogin();
+            } else {
+                alert("Por favor, preencha todos os campos.");
+            }
+        }
+
+        function showSignup() {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('signup-screen').style.display = 'flex';
+        }
+
+        function showLogin() {
+            document.getElementById('signup-screen').style.display = 'none';
+            document.getElementById('login-screen').style.display = 'flex';
+        }
+
+        function showUserList() {
+            // Função para mostrar a lista de usuários disponíveis para seguir.
+            alert("Aqui você pode seguir outros usuários.");
+        }
+    </script>
+
+</body>
+</html>
